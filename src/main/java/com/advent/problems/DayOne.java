@@ -4,6 +4,7 @@ import com.advent.helpers.FileReaderHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class DayOne {
@@ -21,10 +22,17 @@ public class DayOne {
             }
             calorieCount += Integer.parseInt(st);
         }
-        System.out.println("Total calories: " + Collections.max(elfList));
+        System.out.println("Part 1 - Total calories: " + Collections.max(elfList));
+        System.out.println("Part 2 - Total calories of top 3 elves: " + calculateSumOfTop3Elves(elfList));
+        elfList.sort(Collections.reverseOrder());
     }
 
     private static void resetCalorieCount() {
         calorieCount = 0;
     }
-}
+
+    private static int calculateSumOfTop3Elves(List<Integer> elfList) {
+        elfList.sort(Collections.reverseOrder());
+        return elfList.subList(0, 3).stream().mapToInt(Integer::intValue).sum();
+    }
+ }
